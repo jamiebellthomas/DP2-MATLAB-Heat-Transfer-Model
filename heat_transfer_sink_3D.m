@@ -1,12 +1,12 @@
 tic
 % 3D Heat Sink
 %Conduction Constant
-k=0.03;
+k=0.033;
 %Concevtion Coefficient
-h=1;
+h=1.5;
 %Ambient and sink temps
 temp_amb=40;
-temp_sink=5;
+temp_sink=0;
 %Node dimensions
 element_size=0.002;
 %Factor that will determine when iterations stop
