@@ -1,7 +1,7 @@
 tic
 % 3D Heat Sink
 %Conduction Constant
-k=0.033;
+k=0.031;
 %Concevtion Coefficient
 h=1.5;
 %Ambient and sink temps
