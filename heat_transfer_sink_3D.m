@@ -8,7 +8,7 @@ h=1;
 temp_amb=40;
 temp_sink=5;
 %Node dimensions
-element_size=0.003;
+element_size=0.002;
 %Factor that will determine when iterations stop
 tol=1e-5;
 %Dimensions 
