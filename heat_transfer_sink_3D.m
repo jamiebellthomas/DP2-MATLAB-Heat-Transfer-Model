@@ -3,7 +3,7 @@ tic
 %Conduction Constant
 k=0.031;
 %Concevtion Coefficient
-h=1.5;
+h=1.4;
 %Ambient and sink temps
 temp_amb=40;
 temp_sink=0;
