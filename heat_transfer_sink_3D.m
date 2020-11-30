@@ -8,7 +8,7 @@ h=1.4;
 temp_amb=40;
 temp_sink=0;
 %Node dimensions
-element_size=0.002;
+element_size=0.0015;
 %Factor that will determine when iterations stop
 tol=1e-5;
 %Dimensions 
@@ -113,7 +113,6 @@ while error>tol
     it=it+1;
 end
 
-[A,B,C]=meshgrid(1:nx,1:ny,1:nz);
 xslice = [ny];                            
 yslice = [round(sx(round(length(sx)/2))) round((thickness/(2*length_x))*nx)];
 zslice = [1 round(sz(round(length(sz)/2)))];
@@ -162,13 +161,13 @@ b2=b2+(sy(1));
 c2=c2+(sy(1));
 mesh(b2,a1,c2,'FaceAlpha', 0.2);
 
-front=(T_new(sx,sy,sz(1))-T_new(sx,sy,(sz(1)-1)))*-1;
-back=(T_new(sx,sy,sz(end))-T_new(sx,sy,sz(end)+1))*-1;
-top=(T_new(sx,sy(1),sz)-T_new(sx,(sy(1)-1),sz))*-1;
-bottom=(T_new(sx,sy(end),sz)-T_new(sx,(sy(end)+1),sz))*-1;
-left=(T_new(sx(1),sy,sz)-T_new((sx(1)-1),sy,sz))*-1;
-right=(T_new(sx(end),sy,sz)-T_new((sx(end)+1),sy,sz))*-1;
-
+front=sum(sum((T_new(sx,sy,sz(1))-T_new(sx,sy,(sz(1)-1)))*-1*k*(element_size)^2));
+back=sum(sum((T_new(sx,sy,sz(end))-T_new(sx,sy,sz(end)+1))*-1*k*(element_size)^2));
+top=sum(sum((T_new(sx,sy(1),sz)-T_new(sx,(sy(1)-1),sz))*-1*k*(element_size)^2));
+bottom=sum(sum((T_new(sx,sy(end),sz)-T_new(sx,(sy(end)+1),sz))*-1*k*(element_size)^2));
+left=sum(sum((T_new(sx(1),sy,sz)-T_new((sx(1)-1),sy,sz))*-1*k*(element_size)^2));
+right=sum(sum((T_new(sx(end),sy,sz)-T_new((sx(end)+1),sy,sz))*-1*k*(element_size)^2));
+heat_tot=front+back+top+bottom+left+right
 
 
 
