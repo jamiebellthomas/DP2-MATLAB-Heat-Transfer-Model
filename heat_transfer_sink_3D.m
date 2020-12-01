@@ -1,19 +1,19 @@
 tic
 % 3D Heat Sink
 %Conduction Constant
-k=0.031;
+k=0.033;
 %Concevtion Coefficient
-h=1.4;
+h=3;
 %Ambient and sink temps
-temp_amb=40;
+temp_amb=51.3;
 temp_sink=0;
 %Node dimensions
-element_size=0.0015;
+element_size=0.0025;
 %Factor that will determine when iterations stop
 tol=1e-5;
 %Dimensions 
 length_x=0.565;
-length_y=0.41;
+length_y=0.410;
 length_z=0.138;
 %Insulation Thickness
 thickness=0.03;
@@ -161,15 +161,13 @@ b2=b2+(sy(1));
 c2=c2+(sy(1));
 mesh(b2,a1,c2,'FaceAlpha', 0.2);
 
-front=sum(sum((T_new(sx,sy,sz(1))-T_new(sx,sy,(sz(1)-1)))*-1*k*(element_size)^2));
-back=sum(sum((T_new(sx,sy,sz(end))-T_new(sx,sy,sz(end)+1))*-1*k*(element_size)^2));
-top=sum(sum((T_new(sx,sy(1),sz)-T_new(sx,(sy(1)-1),sz))*-1*k*(element_size)^2));
-bottom=sum(sum((T_new(sx,sy(end),sz)-T_new(sx,(sy(end)+1),sz))*-1*k*(element_size)^2));
-left=sum(sum((T_new(sx(1),sy,sz)-T_new((sx(1)-1),sy,sz))*-1*k*(element_size)^2));
-right=sum(sum((T_new(sx(end),sy,sz)-T_new((sx(end)+1),sy,sz))*-1*k*(element_size)^2));
+front=sum(sum((T_new(sx,sy,sz(1))-T_new(sx,sy,(sz(1)-1)))*-1*k*(element_size)));
+back=sum(sum((T_new(sx,sy,sz(end))-T_new(sx,sy,sz(end)+1))*-1*k*(element_size)));
+top=sum(sum((T_new(sx,sy(1),sz)-T_new(sx,(sy(1)-1),sz))*-1*k*(element_size)));
+bottom=sum(sum((T_new(sx,sy(end),sz)-T_new(sx,(sy(end)+1),sz))*-1*k*(element_size)));
+left=sum(sum((T_new(sx(1),sy,sz)-T_new((sx(1)-1),sy,sz))*-1*k*(element_size)));
+right=sum(sum((T_new(sx(end),sy,sz)-T_new((sx(end)+1),sy,sz))*-1*k*(element_size)));
 heat_tot=front+back+top+bottom+left+right
-
-
 
 
 
