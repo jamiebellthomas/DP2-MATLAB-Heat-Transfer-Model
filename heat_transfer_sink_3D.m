@@ -3,12 +3,12 @@ tic
 %Conduction Constant
 k=0.033;
 %Concevtion Coefficient
-h=3;
+h=5;
 %Ambient and sink temps
 temp_amb=51.3;
 temp_sink=0;
 %Node dimensions
-element_size=0.0025;
+element_size=0.002;
 %Factor that will determine when iterations stop
 tol=1e-5;
 %Dimensions 
@@ -16,7 +16,7 @@ length_x=0.565;
 length_y=0.410;
 length_z=0.138;
 %Insulation Thickness
-thickness=0.03;
+thickness=0.01;
 %Sink Dimensions
 source_x=[thickness, length_x-thickness];
 source_y=[thickness, length_y-thickness];
@@ -167,7 +167,19 @@ top=sum(sum((T_new(sx,sy(1),sz)-T_new(sx,(sy(1)-1),sz))*-1*k*(element_size)));
 bottom=sum(sum((T_new(sx,sy(end),sz)-T_new(sx,(sy(end)+1),sz))*-1*k*(element_size)));
 left=sum(sum((T_new(sx(1),sy,sz)-T_new((sx(1)-1),sy,sz))*-1*k*(element_size)));
 right=sum(sum((T_new(sx(end),sy,sz)-T_new((sx(end)+1),sy,sz))*-1*k*(element_size)));
-heat_tot=front+back+top+bottom+left+right
+%Total watts leaving source (J/s)
+heat_tot=front+back+top+bottom+left+right;
+%Mass of ice when box is half full (kg)
+mass_ice=length_x*length_y*length_z*917*0.5;%(Density of ice)
+latent_fusion_ice=3.34*10^5;
+%Energy required to melt ice. (J)
+melt_energy=mass_ice*latent_fusion_ice;
+%Time taken to melt in hours
+melt_time=(melt_energy/heat_tot)/3600
+
+
+
+
 
 
 
